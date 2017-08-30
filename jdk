@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ "$1" == 7 ]; then 
+    echo "switch to openjdk7"
+    update-alternatives --config java <<EOF
+1
+EOF
+    update-alternatives --config javac <<EOF
+1
+EOF
+else
+    echo "switch to openjdk8"
+    update-alternatives --config java <<EOF
+2
+EOF
+    update-alternatives --config javac <<EOF
+2
+EOF
+fi
+
+

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+PUID=${PUID:-999}
+PGID=${PGID:-$PUID}
+
+usermod -o -u "$PUID" user
+groupmod -o -g "$PGID" user
+passwd user <<EOF
+.
+.
+EOF
+
+if [ "$JDK" == 7 ]; then
+    jdk 7 > /dev/null
+else
+    jdk 8 > /dev/null
+fi
+su user
