@@ -10,6 +10,15 @@ passwd user <<EOF
 .
 EOF
 
+echo "function jack_server() {" >> /etc/bash.bashrc
+echo "    if [ \"\$1\" == \"restart\" ]; then" >> /etc/bash.bashrc
+echo "        /mnt/out/host/linux-x86/bin/jack-admin kill-server && /mnt/out/host/linux-x86/bin/jack-admin start-server" >> /etc/bash.bashrc
+echo "    else" >> /etc/bash.bashrc
+echo "        export JACK_SERVER_VM_ARGUMENTS=\"-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx\$1\"" >> /etc/bash.bashrc
+echo "    fi" >> /etc/bash.bashrc
+echo "}" >> /etc/bash.bashrc
+
+
 if [ "$JDK" == 7 ]; then
     jdk 7 > /dev/null
 else
