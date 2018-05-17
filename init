@@ -18,6 +18,9 @@ echo "        export JACK_SERVER_VM_ARGUMENTS=\"-Dfile.encoding=UTF-8 -XX:+Tiere
 echo "    fi" >> /etc/bash.bashrc
 echo "}" >> /etc/bash.bashrc
 
+echo "export USE_CCACHE=1" >> /etc/bash.bashrc
+echo "export CCACHE_DIR=/mnt/.ccache" >> /etc/bash.bashrc
+echo "ccache -M 50G" >> /etc/bash.bashrc
 
 if [ "$JDK" == 7 ]; then
     jdk 7 > /dev/null
