@@ -4,7 +4,7 @@ default passwd is `.`
   
 ```shell
 cd aosp
-docker run -it --rm --name android_builder -e "UID=$(id -u)" -v $(pwd)/:/mnt fcying/android_builder:latest
+docker run -it --rm --name android_builder -e "PUID=$(id -u)" -v $(pwd)/:/mnt -v /etc/localtime:/etc/localtime:ro fcying/android_builder:latest
 ```
   
 if build android6.0, must swith to openjdk7
