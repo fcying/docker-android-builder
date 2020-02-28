@@ -3,7 +3,7 @@ MAINTAINER fcying
 
 WORKDIR /mnt
 
-RUN apt-get update \ 
+RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     python-software-properties software-properties-common \
     && add-apt-repository -y ppa:openjdk-r/ppa \
@@ -19,12 +19,12 @@ RUN apt-get install --no-install-recommends -y \
     bc rsync \
     && pip install pycrypto
 
-RUN useradd -u 999 -d /config -m -G root,sudo user 
-COPY init /bin/
+RUN useradd -u 999 -d /config -m -G root,sudo user
+COPY entrypoint.sh /
 COPY jdk /bin/
-RUN chmod 770 /bin/init \
+RUN chmod 770 /entrypoint.sh \
     && chmod 770 /bin/jdk \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENTRYPOINT ["/bin/init"]
+ENTRYPOINT ["/entrypoint.sh"]
 
