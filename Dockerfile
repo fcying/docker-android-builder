@@ -15,6 +15,8 @@ RUN apt-get update \
     && apt-get install --no-install-recommends -y \
     vim bash-completion wget rsync \
     ccache bc openjdk-8-jdk python-pip python3-pip \
+    && wget -O/usr/bin/repo https://storage.googleapis.com/git-repo-downloads/repo \
+    && chmod +x /usr/bin/repo \
     && pip install -i https://repo.huaweicloud.com/repository/pypi/simple pycryptodome \
     && pip3 install -i https://repo.huaweicloud.com/repository/pypi/simple pycryptodome \
     && wget https://download.java.net/openjdk/jdk7u75/ri/openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz -Oopenjdk7.tgz \
