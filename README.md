@@ -1,6 +1,6 @@
 # docker-android-builder
 easy build android  
-build test for aosp 6 ~ aosp 12
+build test for aosp 6 ~ aosp 13
 
 #### config
 * /mnt  

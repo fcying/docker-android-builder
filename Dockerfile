@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM fcying/nsjail
 MAINTAINER fcying
 
 WORKDIR /mnt
@@ -14,7 +14,7 @@ RUN sed -i "s@http://.*archive.ubuntu.com@http://repo.huaweicloud.com@g" /etc/ap
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
     vim bash-completion wget rsync \
-    ccache bc openjdk-8-jdk python-pip python3-pip \
+    ccache bc openjdk-8-jdk python-pip python3-pip python3-setuptools python-setuptools \
     && wget -O/usr/bin/repo https://storage.googleapis.com/git-repo-downloads/repo \
     && chmod +x /usr/bin/repo \
     && pip install -i https://repo.huaweicloud.com/repository/pypi/simple pycryptodome \
