@@ -20,8 +20,14 @@ function jack_server() {
     fi
 }
 
+function JDK() {
+    if [ "$1" == "7" ]; then
+        export JAVA_HOME=/opt/jdk_1.7.0_75
+        export JRE_HOME=/opt/jdk_1.7.0_75
+        export PATH=$JAVA_HOME/bin:$PATH
+    fi
+}
+
 if [ "$JDK" == 7 ]; then
-    export JAVA_HOME=/opt/jdk_1.7.0_75
-    export JRE_HOME=/opt/jdk_1.7.0_75
-    export PATH=$JAVA_HOME/bin:$PATH
+    JDK 7
 fi

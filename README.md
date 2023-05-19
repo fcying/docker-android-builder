@@ -40,6 +40,7 @@ $ docker run -it --rm -v $(pwd)/:/mnt -e "PUID=$(id -u)" fcying/android-builder:
 * if build android6.0, must swith to openjdk7
 ```shell
 $ docker run -it --rm -e "JDK=7" -v $(pwd)/:/mnt fcying/android-builder:latest
+or run `JDK 7` in container
 ```
 
 * jack_server memory setting

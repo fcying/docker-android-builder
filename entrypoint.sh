@@ -8,12 +8,6 @@ if [ -n "$PUID" ]; then
 user
 user
 EOF
-fi
-
-echo "source /config/bashrc" >> /etc/bash.bashrc
-chmod -R 777 /config
-
-if [ -n "$PUID" ]; then
     su user
 else
     bash

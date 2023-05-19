@@ -3,8 +3,8 @@ MAINTAINER fcying
 
 WORKDIR /mnt
 
-RUN sed -i "s@http://.*archive.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list \
-    && sed -i "s@http://.*security.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list \
+RUN sed -i "s@http://.*archive.ubuntu.com@http://opentuna.cn@g" /etc/apt/sources.list \
+    && sed -i "s@http://.*security.ubuntu.com@http://opentuna.cn@g" /etc/apt/sources.list \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && apt-get update \
     && apt-get install --no-install-recommends -y \
@@ -13,7 +13,7 @@ RUN sed -i "s@http://.*archive.ubuntu.com@http://repo.huaweicloud.com@g" /etc/ap
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
-    vim bash-completion wget rsync \
+    sudo vim bash-completion wget rsync \
     ccache bc openjdk-8-jdk python-pip python3-pip python3-setuptools python-setuptools \
     && wget -O/usr/bin/repo https://storage.googleapis.com/git-repo-downloads/repo \
     && chmod +x /usr/bin/repo \
@@ -24,14 +24,18 @@ RUN apt-get update \
     && mv java-se-7u75-ri /opt/jdk_1.7.0_75 \
     && mv /opt/jdk_1.7.0_75/bin/java /opt/jdk_1.7.0_75/bin/java_origin \
     && sed -i "s@jdk.tls.disabledAlgorithms=SSLv3, TLSv1, TLSv1.1@jdk.tls.disabledAlgorithms=SSLv3@" /etc/java-8-openjdk/security/java.security \
-    && mkdir /config && chmod 777 /config
+    && mkdir /config
 
 RUN useradd -u 999 -d /home/user -m -G root,sudo user
 COPY entrypoint.sh /
 COPY bashrc /config/
 COPY fakejdk7.sh /opt/jdk_1.7.0_75/bin/java
 RUN chmod 770 /entrypoint.sh \
+    && chmod -R 777 /config \
+    && chsh -s $(which bash) user \
+    && chsh -s $(which bash) root \
     && chmod 770 /opt/jdk_1.7.0_75/bin/java \
+    && echo "source /config/bashrc" >> /etc/bash.bashrc \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENTRYPOINT ["/entrypoint.sh"]
