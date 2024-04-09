@@ -10,7 +10,7 @@ if [ -n "$PUID" ]; then
 user
 user
 EOF
-    su user ; exit
+    su -l user ; exit
 else
     bash
 fi
